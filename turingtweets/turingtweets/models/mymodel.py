@@ -1,18 +1,15 @@
 from sqlalchemy import (
     Column,
-    Index,
+    Unicode,
     Integer,
-    Text,
 )
 
 from .meta import Base
 
 
-class MyModel(Base):
-    __tablename__ = 'models'
+class Tweet(Base):
+    """Model for a single tweet."""
+
+    __tablename__ = 'tweets'
     id = Column(Integer, primary_key=True)
-    name = Column(Text)
-    value = Column(Integer)
-
-
-Index('my_index', MyModel.name, unique=True, mysql_length=255)
+    tweet = Column(Unicode)

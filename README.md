@@ -21,13 +21,15 @@ Repository created and initial frameworking completed.
 ## Set Up and Installation:
 
 - Clone this repository to your local machine.
-
-- TBD
+- Change directory into "turingtweets"
+- "pip install -e ."
+- "python -m nltk.downloader all"
 
 ## To Test
 
-- If you have the `testing` extras installed, testing is simple. If you're in the same directory as `setup.py` type the following:
-
 ```
+$ cd turingtweets/
+$ pip install -e .
+$ pip install -e .[testing]
 $ tox
 ```
