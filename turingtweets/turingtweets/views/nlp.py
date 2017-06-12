@@ -12,4 +12,9 @@ def gen_tweet():
     host_url = os.environ.get('REDIS_URL')
     markov_chains = redis.StrictRedis(host=host_url).get('markov_tweets')
     markov_chains = pickle.loads(markov_chains)
-    return markov_chains.make_short_sentence(140)
+    the_tweet = ''
+    for n in range(20):
+        tmp = markov_chains.make_short_sentence(140)
+        if len(tmp) > len(the_tweet):
+            the_tweet = tmp
+    return the_tweet

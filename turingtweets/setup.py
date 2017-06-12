@@ -22,6 +22,7 @@ requires = [
     'redis',
     'psycopg2',
     'markovify',
+    'tweepy',
 ]
 
 tests_require = [
