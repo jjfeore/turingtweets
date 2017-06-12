@@ -1,51 +1,43 @@
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <link rel="stylesheet" type="text/css" href="{{ request.static_path('turingtweets:static/style.css') }}" />
-      <meta charset="utf-8">
-      <title></title>
-    </head>
-    <body>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ request.static_path('turingtweets:static/style.css') }}"/>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+    <main>
 
-      <main>
+        <div class="div-header">
+            <h1 class="h1-title-header">
+                Turing Trump
+            </h1>
+        </div>
 
-
-  <div class="div-header">
-    <h1 class="h1-title-header">
-      Turing Trump
-    </h1>
-  </div>
-
-
+        {% block content %}{% endblock %}
 
 
-  {% block content %}{% endblock %}
+        <div class="div-submit">
+            <input type="submit"/>
+        </div>
+
+        <div class="div-spacer-submit-nav">
+        </div>
+
+        <div class="div-nav">
+            <nav>
+                <a href="/">HOME</a> |
+                <a href="/about">ABOUT</a>
+            </nav>
+        </div>
 
 
+        <footer>
+            <p>Posted by: Turing Trump Tweets</p>
+            <p>Contact information: <a href="mailto:turingtrump@gmail.com">
+                turingtrump@gmail.com</a>.</p>
+        </footer>
+    </main>
 
-
-
-  <div class="div-submit">
-  <input type="submit" />
-  </div>
-
-    <div class="div-spacer-submit-nav">
-    </div>
-
-  <div class="div-nav">
-    <nav>
-      <a href="/">HOME</a> |
-      <a href="/about">ABOUT</a>
-    </nav>
-  </div>
-
-
-    <footer>
-      <p>Posted by: Turing Trump Tweets</p>
-      <p>Contact information: <a href="mailto:turingtrump@gmail.com">
-     turingtrump@gmail.com</a>.</p>
-    </footer>
-  </main>
-
-    </body>
-  </html>
+</body>
+</html>
