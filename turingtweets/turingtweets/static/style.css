@@ -1,0 +1,45 @@
+main {
+  text-align: center;
+}
+
+.div-nav{
+  text-align: center
+}
+
+.div-header{
+  text-align: center
+}
+
+.div-two-tweets{
+  border: 2px solid blue;
+  text-align: center;
+
+}
+
+.div-left-tweet{
+  width: 30%;
+  text-align: center;
+  border: 2px solid red;
+  display: inline-block;
+}
+
+.div-right-tweet{
+  width: 30%;
+  text-align: center;
+  border: 2px solid red;
+  display: inline-block;
+}
+
+.div-submit{
+  text-align: center;
+  padding-top: 1em;
+}
+
+.div-spacer-submit-nav {
+  height: 100px;
+}
+
+footer {
+  text-align: center;
+  padding-top: 5em;
+}
