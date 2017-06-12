@@ -1,0 +1,3 @@
+[run]
+source = turingtweets
+omit = turingtweets/test*
