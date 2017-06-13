@@ -10,7 +10,8 @@ import os
 def gen_tweet():
     """Read the redis, and build a fake tweet from that."""
     host_url = os.environ.get('REDIS_URL')  
-    markov_chains = redis.StrictRedis(host=host_url).get('markov_tweets')
+    chains = redis.StrictRedis(host=host_url)
+    markov_chains = chains.get('markov_tweets')
     markov_chains = pickle.loads(markov_chains)
     the_tweet = None
     # for n in range(20):
