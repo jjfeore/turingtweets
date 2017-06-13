@@ -3,7 +3,7 @@ from pyramid.view import view_config
 
 from sqlalchemy.exc import DBAPIError
 
-from ..models import MyModel
+from turingtweets.models import mymodel
 
 from pyramid.httpexceptions import (
     HTTPNotFound,
