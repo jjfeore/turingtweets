@@ -59,5 +59,5 @@ def main(argv=sys.argv):
             models.append(new_tweet)
             tweet_list.append(tweet_item['text'])
 
-        fourgrams(tweet_list)
+        # fourgrams(tweet_list)
         dbsession.add_all(models)
