@@ -10,8 +10,8 @@ from pyramid.httpexceptions import (
     HTTPNotFound,
     HTTPFound
 )
-from math import random
-from nlp import gen_tweet
+import random
+from turingtweets.views.nlp import gen_tweet
 
 
 @view_config(route_name='home', renderer='../templates/mytemplate.jinja2')
@@ -24,6 +24,6 @@ def home_view(request):
     fake_tweet = gen_tweet()
     return {
         'page': 'Home',
-        'real': real_tweet,
+        'real': real_tweet.tweet,
         'fake': fake_tweet
     }
