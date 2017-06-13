@@ -6,7 +6,7 @@ import json
 from pyramid.paster import (
     get_appsettings,
     setup_logging,
-    )
+)
 
 from ..models.mymodel import Tweet
 from turingtweets.scripts.builddict import fourgrams
@@ -17,7 +17,7 @@ from ..models import (
     get_engine,
     get_session_factory,
     get_tm_session,
-    )
+)
 
 
 def usage(argv):
@@ -37,6 +37,7 @@ def main(argv=sys.argv):
     settings['sqlalchemy.url'] = os.environ.get('DATABASE_URL')
 
     engine = get_engine(settings)
+    Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
     session_factory = get_session_factory(engine)
@@ -48,16 +49,15 @@ def main(argv=sys.argv):
 
         HERE = os.path.dirname(__file__)
 
-        with open(os.path.join(HERE, '../models/nhuntwalker_short.json'), 'rb') as json_file:
+        with open(os.path.join(HERE, '../models/nhuntwalker_short.json'), 'r', encoding='utf-8') as json_file:
             json_data = json.load(json_file)
 
         for tweet_item in json_data:
             new_tweet = Tweet(
                 tweet=tweet_item['text']
             )
-
             models.append(new_tweet)
             tweet_list.append(tweet_item['text'])
 
-        # fourgrams(tweet_list)
+        fourgrams(tweet_list)
         dbsession.add_all(models)
