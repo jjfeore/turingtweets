@@ -60,4 +60,5 @@ def main(argv=sys.argv):
             tweet_list.append(tweet_item['text'])
 
         fourgrams(tweet_list)
+
         dbsession.add_all(models)
