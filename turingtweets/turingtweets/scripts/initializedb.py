@@ -42,6 +42,7 @@ def main(argv=sys.argv):
     session_factory = get_session_factory(engine)
 
     tweet_list = []
+    models = []
     with transaction.manager:
         dbsession = get_tm_session(session_factory, transaction.manager)
 
@@ -55,7 +56,8 @@ def main(argv=sys.argv):
                 tweet=tweet_item['text']
             )
 
+            models.append(new_tweet)
             tweet_list.append(tweet_item['text'])
 
         fourgrams(tweet_list)
-        dbsession.add_all(tweet_list)
+        dbsession.add_all(models)
