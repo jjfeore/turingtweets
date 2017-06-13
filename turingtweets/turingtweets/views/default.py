@@ -14,6 +14,8 @@ import random
 from turingtweets.views.nlp import gen_tweet
 
 
+
+
 @view_config(route_name='home', renderer='../templates/mytemplate.jinja2')
 def home_view(request):
     """View for home route."""
@@ -22,6 +24,7 @@ def home_view(request):
     rand_tweet = random.randint(1, tweet_ct)
     real_tweet = session.query(Tweet).get(rand_tweet)
     fake_tweet = gen_tweet()
+
     return {
         'page': 'Home',
         'real': real_tweet.tweet,
