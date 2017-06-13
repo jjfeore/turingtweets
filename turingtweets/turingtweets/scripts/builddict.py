@@ -20,4 +20,4 @@ def fourgrams(tweets):
             pass
     markov_list = markovify.combine(markov_list)
     to_redis = pickle.dumps(markov_list)
-    redis.StrictRedis(host=host_url).set('markov_tweets', to_redis)
+    redis.from_url(host_url).set('markov_tweets', to_redis)
