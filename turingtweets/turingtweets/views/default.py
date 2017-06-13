@@ -19,7 +19,7 @@ def home_view(request):
     """View for home route."""
     session = request.dbsession
     tweet_ct = session.query(Tweet).count()
-    rand_tweet = random.randint(1, tweet_ct)
+    rand_tweet = 352
     real_tweet = session.query(Tweet).get(rand_tweet)
     fake_tweet = gen_tweet()
     return {
