@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
 cd turingtweets
-initializedb production.ini
 python setup.py develop
+initializedb production.ini
 python runapp.py
