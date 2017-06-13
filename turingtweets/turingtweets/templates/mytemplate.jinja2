@@ -1,18 +1,25 @@
 {% extends "layout.jinja2" %}
 {% block content %}
+    <div class="div-spacer-submit-nav">
+      <h2 class="white-text" class="h2-white-text">
+            Pick the Real Tweet
+          </h2>
+    </div>
     <section class="div-two-tweets">
-
-        <div class="div-left-tweet">
-            <a href="#">
-                <img src="http://www.placehold.it/500x200" alt=""/>
-            </a>
+      <a href="#">
+        <div class="div-tweet-photo-text">
+          <img id="tweet-left" class="img-tweet" src="{{ request.static_path('turingtweets:static/face.png') }}" alt="" />
+          </br>
+          <p class="p-tweet-text">{{ real }}</p>
         </div>
+      </a>
 
-        <div class="div-right-tweet">
-            <a href="#">
-                <img src="http://www.placehold.it/500x200" alt=""/>
-            </a>
+      <a href="#">
+        <div class="div-tweet-photo-text">
+          <img id="tweet-right" class="img-tweet" src="{{ request.static_path('turingtweets:static/face.png') }}" alt="" />
+          </br>
+          <p class="p-tweet-text">{{ fake }}</p>
         </div>
-
+      </a>
     </section>
 {% endblock content %}

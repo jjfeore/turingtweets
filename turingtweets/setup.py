@@ -59,7 +59,7 @@ setup(
             'main = turingtweets:main',
         ],
         'console_scripts': [
-            'initialize_turingtweets_db = turingtweets.scripts.initializedb:main',
+            'initializedb = turingtweets.scripts.initializedb:main',
         ],
     },
 )

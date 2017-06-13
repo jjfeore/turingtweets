@@ -1,45 +1,221 @@
+/*=========== Universal========== */
+
+body {
+  background: url("https://il8.picdn.net/shutterstock/videos/132343/thumb/1.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
 main {
   text-align: center;
 }
 
-.div-nav{
-  text-align: center
+a {
+  text-decoration: none;
 }
 
-.div-header{
-  text-align: center
+
+/*=========== Header ========== */
+
+.white-text {
+  color: white;
 }
 
-.div-two-tweets{
-  border: 2px solid blue;
+h1 {
+  font-size: 3em;
+  margin: 20px 0 20px 0;
+}
+
+h2 {
+  font-size: 2em;
+  text-shadow: 0 0 10px #FF0000;
+}
+
+.div-header {
   text-align: center;
-
 }
 
-.div-left-tweet{
-  width: 30%;
+.div-header-red {
   text-align: center;
-  border: 2px solid red;
+  background: red;
+  border-radius: 20px;
+  width: 840px;
   display: inline-block;
+  opacity: .8;
+  margin: 20px 0 20px 0;
 }
 
-.div-right-tweet{
-  width: 30%;
+
+/*=========== Main Body ========== */
+
+.div-two-tweets {
   text-align: center;
-  border: 2px solid red;
-  display: inline-block;
 }
 
-.div-submit{
+.div-tweet-photo-text {
+  background: white;
+  height: 12em;
+  width: 440px;
+  display: inline-block;
+  text-align: left;
+  border-radius: 10px;
+  margin: 1em 2em 2em;
+  padding-bottom: 10px;
+}
+
+.img-tweet {
+  display: inline-block;
+  border: 10px solid white;
+  margin: 1%;
+  height: 50%
+}
+
+.p-tweet-text {
+  font-family: arial;
+  color: black;
+  padding-bottom: 1em;
+  margin: 0 1em 1em 2em;
+}
+
+
+/*=========== Submit Button ========== */
+
+.div-submit {
   text-align: center;
   padding-top: 1em;
 }
+
+.button {
+  background-color: blue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  border-radius: 10px;
+}
+
+/*=========== Navigation ========== */
 
 .div-spacer-submit-nav {
   height: 100px;
 }
 
+.div-nav {
+  text-align: center
+}
+
+
+/*=========== Footer ========== */
+
 footer {
   text-align: center;
   padding-top: 5em;
+}
+
+
+/*=========== MOBILE BELOW ========== */
+
+
+/*=========== MOBILE BELOW ========== */
+
+
+/*=========== MOBILE BELOW ========== */
+
+@media only screen and (max-device-width: 770px), only screen and (max-device-width: 770px) {
+  /*=========== Universal========== */
+  /*=========== MOBILE BELOW ========== */
+  body {
+    background: url("https://il8.picdn.net/shutterstock/videos/132343/thumb/1.jpg");
+    background-size: 110% 110%;
+    background-repeat: no-repeat;
+  }
+  main {
+    text-align: center;
+  }
+  a {
+    text-decoration: none;
+  }
+  /*=========== Header ========== */
+  /*=========== MOBILE BELOW ========== */
+  .white-text {
+    color: white;
+  }
+  h1 {
+    font-size: 5em;
+  }
+  h2 {
+    font-size: 5em;
+  }
+  .div-header {
+    text-align: center;
+    width: 100%;
+    display: block;
+  }
+  .div-header-red {
+    text-align: center;
+    background: red;
+    width: 100%;
+    display: block;
+  }
+  /*=========== Main Body ========== */
+  /*=========== MOBILE BELOW ========== */
+  .div-two-tweets {
+    text-align: center;
+    width: 100%;
+  }
+  .div-tweet-photo-text {
+    background: white;
+    height: 29em;
+    width: 90%;
+    text-align: left;
+    border-radius: 10px;
+    margin: 2em 2em;
+  }
+  .img-tweet {
+    display: inline-block;
+    border: 10px solid white;
+    margin: 1%;
+    height: 50%;
+  }
+  .p-tweet-text {
+    font-family: arial;
+    color: black;
+    font-size: 2.5em;
+    margin: 0 1em 0 1em;
+  }
+  /*=========== Submit Button ========== */
+  /*=========== MOBILE BELOW ========== */
+  .div-submit {
+    text-align: center;
+    padding-top: 1em;
+  }
+  .button {
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 50px;
+    width: 90%;
+  }
+  /*=========== Navigation ========== */
+  /*=========== MOBILE BELOW ========== */
+  .div-nav {
+    text-align: center
+  }
+  nav a {
+    padding-top: 10px;
+    font-size: 20px;
+  }
+  /*=========== Footer ========== */
+  /*=========== MOBILE BELOW ========== */
+  footer {
+    text-align: center;
+    font-size: 30px;
+  }
 }
