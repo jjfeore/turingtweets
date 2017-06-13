@@ -3,41 +3,45 @@
 <head>
     <link rel="stylesheet" type="text/css" href="{{ request.static_path('turingtweets:static/style.css') }}"/>
     <meta charset="utf-8">
-    <title>Turing Trump | {{ page }}</title>
+    <title>Make Twitter Great Again | {{ page }}</title>
 </head>
-<body>
-    <main>
-
-        <div class="div-header">
-            <h1 class="h1-title-header">
-                Turing Trump
-            </h1>
+    <body>
+    <!-- /*=========== Header ========== */ -->
+      <div class="div-header">
+        <div class="div-header-red">
+          <h1 class="white-text" class="h1-title-header">
+          Make Twitter Great Again
+          </h1>
         </div>
+      </div>
+    <!-- /*=========== Main Body ========== */ -->
+      <main>
+          {% block content %}{% endblock %}
 
-        {% block content %}{% endblock %}
-
-
-        <div class="div-submit">
-            <input type="submit"/>
+          <!-- /*=========== Submit Button ========== */ -->
+          <div class="div-submit">
+          <input class="button" type="submit" value="Submit" />
         </div>
 
         <div class="div-spacer-submit-nav">
         </div>
-
+    <!-- /*=========== Navigation ========== */ -->
         <div class="div-nav">
-            <nav>
-                <a href="/">HOME</a> |
-                <a href="/about">ABOUT</a>
-            </nav>
+          <nav>
+            <a href="/">HOME</a> |
+            <a href="/about">ABOUT</a>
+          </nav>
         </div>
 
-
+    <!-- /*=========== Footer ========== */ -->
         <footer>
-            <p>Posted by: Turing Trump Tweets</p>
-            <p>Contact information: <a href="mailto:turingtrump@gmail.com">
-                turingtrump@gmail.com</a>.</p>
+          <p>Posted by: Turing Trump Tweets</p>
+          <p>Contact information: <a href="mailto:turingtrump@gmail.com">
+           turingtrump@gmail.com</a>.</p>
         </footer>
-    </main>
-
-</body>
+      </main>
+    </body>
 </html>
+
+
+
