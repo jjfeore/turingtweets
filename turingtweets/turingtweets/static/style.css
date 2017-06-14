@@ -121,7 +121,9 @@ h2 {
 }
 
 .div-nav {
+  margin-top: 1em;
   text-align: center;
+  color: #888;
 }
 
 .div-nav a {
