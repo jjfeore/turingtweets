@@ -50,7 +50,7 @@ def main(argv=sys.argv):
         dbsession = get_tm_session(session_factory, transaction.manager)
 
         HERE = os.path.dirname(__file__)
-
+        
         with open(os.path.join(HERE, '../models/nhuntwalker_short.json'), 'r', encoding='utf-8') as json_file:
             json_data = json.load(json_file)
 
