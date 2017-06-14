@@ -6,7 +6,7 @@ sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', minutes=1)
 def timed_job():
-    logging.exception('This job is run every minute.')
+    logging.exception('THIS JOB IS RUN EVERY MINUTE.')
 
 
 sched.start()

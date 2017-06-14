@@ -1,2 +1,2 @@
 web: ./run
-clock: python scheduler.py
+clock: python scheduler.py -p $PORT
