@@ -1,0 +1,78 @@
+p {
+  font-family: Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+span {
+  color: #657786;
+}
+
+/* ==========MAIN DIV CONTAINER============= */
+.div-main-about-wrapper {
+  text-align: center
+}
+
+
+.div-container {
+  box-sizing: border-box;
+  position: relative;
+  height: 147px;
+  width: 590px;
+  display: inline-block;
+  border: 1px solid #e6ecf0;;
+  border-radius: 5px;
+}
+
+/* ==========TWEET IMAGE============= */
+
+.div-img-tweet-photo {
+  box-sizing: border-box;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  height: 60px;
+  width: 60px;
+}
+
+
+.img-tweet-photo {
+  border-radius: 5px;
+  width: 50px;
+  height: 50px;
+}
+
+
+/* ==========HEADER TEXT============= */
+
+.div-tweet-header {
+  box-sizing: border-box;
+  position: absolute;
+  left: 91px;
+  top: 5px;
+  width: 371px;
+  height: 20px;
+  overflow: visible;
+  font-family: Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: left;
+}
+
+.div-tweet-body {
+  box-sizing: border-box;
+  position: absolute;
+  left: 91px;
+  top: 30px;
+  width: 450px;
+  height: 73px;
+  overflow: visible;
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: justify
+}

@@ -1,15 +1,8 @@
 /*=========== Universal========== */
 
-* {
-  box-sizing: border-box;
-}
-
 body {
-/*  background: url("https://il8.picdn.net/shutterstock/videos/132343/thumb/1.jpg");*/
-  background-color: #f5f8fa;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  font-family: 'Merriweather', serif;
 }
 
 main {
@@ -45,11 +38,10 @@ h2 {
   text-align: center;
   background: red;
   border-radius: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
+  width: 840px;
   display: inline-block;
-  opacity: .6;
-  margin: 20px 0 0.5em 0;
+  opacity: .8;
+  margin: 20px 0 20px 0;
 }
 
 
@@ -57,9 +49,6 @@ h2 {
 
 .div-two-tweets {
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  margin: auto;
 }
 
 .div-tweet-photo-text {
@@ -68,12 +57,9 @@ h2 {
   width: 440px;
   display: inline-block;
   text-align: left;
-  border: 1px solid #e6ecf0;
   border-radius: 10px;
-  margin: 0.5em 2em 2em;
+  margin: 1em 2em 2em;
   padding-bottom: 10px;
-  cursor: pointer;
-  vertical-align: top;
 }
 
 .img-tweet {
@@ -84,10 +70,10 @@ h2 {
 }
 
 .p-tweet-text {
-  font-family: Arial;
+  font-family: arial;
   color: black;
   padding-bottom: 1em;
-  margin: 0 1em 1em 1em;
+  margin: 0 1em 1em 2em;
 }
 
 
@@ -95,11 +81,11 @@ h2 {
 
 .div-submit {
   text-align: center;
-  margin: 20px;
+  padding-top: 1em;
 }
 
 .button {
-  background-color: rgba(255, 0, 0, 0.6);;
+  background-color: blue;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -107,11 +93,7 @@ h2 {
   text-decoration: none;
   display: inline-block;
   font-size: 30px;
-  font-weight: bold;
-  border: 1px solid #e6ecf0;
   border-radius: 10px;
-  cursor: pointer;
-  display: none;
 }
 
 /*=========== Navigation ========== */
@@ -121,13 +103,7 @@ h2 {
 }
 
 .div-nav {
-  margin-top: 1em;
-  text-align: center;
-  color: #888;
-}
-
-.div-nav a {
-  color: rgba(255, 0, 0, 0.6);
+  text-align: center
 }
 
 
@@ -151,7 +127,6 @@ footer {
   /*=========== Universal========== */
   /*=========== MOBILE BELOW ========== */
   body {
-    background: url("https://il8.picdn.net/shutterstock/videos/132343/thumb/1.jpg");
     background-size: 110% 110%;
     background-repeat: no-repeat;
   }
