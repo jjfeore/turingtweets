@@ -5,7 +5,6 @@
 }
 
 body {
-/*  background: url("https://il8.picdn.net/shutterstock/videos/132343/thumb/1.jpg");*/
   background-color: #f5f8fa;
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -152,7 +151,6 @@ footer {
   /*=========== Universal========== */
   /*=========== MOBILE BELOW ========== */
   body {
-    background: url("https://il8.picdn.net/shutterstock/videos/132343/thumb/1.jpg");
     background-size: 110% 110%;
     background-repeat: no-repeat;
   }
