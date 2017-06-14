@@ -3,22 +3,23 @@ import datetime
 import tweepy
 from turingtweets.models import get_engine
 from sqlalchemy.orm import sessionmaker
-from turingtweets.models.mymodel import FakeTweet
+from turingtweets.models.mymodel import Tweet
 
 
 def update_tweet_db():
     test_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
     print(os.environ.get('DATABASE_URL'))
     engine = get_engine(test_dict)
-    print(engine)
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
     api = authenticate_with_twitter()
     list_of_tweets = get_tweets(api, "nhuntwalker")
-    print(list_of_tweets)
+    tweet_objects = []
     for tweet in list_of_tweets:
         print("Inside of update_tweet_db: {}".format(tweet))
-
+        tweet_objects.append(Tweet(tweet=tweet))
+    session.add_all(tweet_objects)
+    session.commit()
 
 def authenticate_with_twitter():
     auth = tweepy.OAuthHandler(os.environ.get('CONSUMER_KEY'), os.environ.get('CONSUMER_SECRET'))
