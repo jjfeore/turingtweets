@@ -2,37 +2,30 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="{{ request.static_path('turingtweets:static/style.css') }}"/>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
     <meta charset="utf-8">
     <title>Make Twitter Great Again | {{ page }}</title>
 </head>
     <body>
       <div class="div-header">
         <div class="div-header-red">
-          <h1 class="white-text" class="h1-title-header">
+          <h1 class="white-text h1-title-header">
           Make Twitter Great Again
           </h1>
         </div>
       </div>
       <main>
         {% block content %}{% endblock %}
+
         <div class="div-submit">
             <input class="button" type="button" value="Try Again?" />
         </div>
 
-        <div class="div-spacer-submit-nav">
-        </div>
         <div class="div-nav">
           <nav>
-            <a href="/">HOME</a> |
-            <a href="/about">ABOUT</a>
+            <a href="/">Home</a> | <a href="/about">About</a> | <a href="mailto:turingtrump@gmail.com">Contact</a>
           </nav>
         </div>
-
-        <footer>
-          <p>Posted by: Turing Tweets</p>
-          <p><a href="mailto:turingtrump@gmail.com">
-           Contact Us</a></p>
-        </footer>
       </main>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src="{{ request.static_path('turingtweets:static/js/app.js') }}"></script>

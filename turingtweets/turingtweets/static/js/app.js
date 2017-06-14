@@ -24,22 +24,36 @@ function setFakeTweet() {
     }
 }
 
-$('#left-tweet').click(function() {
+$('.div-tweet-photo-text').eq(0).click(function() {
     if ($('#left-tweet').text() == real) {
-        $('.white-text').text('Correct!');
+        $('.h2-white-text').text('Correct!');
+        $('.h2-white-text').css('text-shadow', '0px 0px 15px #00FF00');
+        $('.div-tweet-photo-text').eq(0).css('box-shadow', '0px 0px 15px #00FF00');
+        $('.div-tweet-photo-text').eq(1).css('box-shadow', '0px 0px 15px #FF0000');
+        $('.button').css('background-color', 'rgba(0, 255, 0, 0.6)');
+        $('.button').css('color', 'rgba(0, 0, 0, 0.6)');
     }
     else {
-        $('.white-text').text('Incorrect! SAD');
+        $('.h2-white-text').text('Incorrect! SAD');
+        $('.div-tweet-photo-text').eq(1).css('box-shadow', '0px 0px 15px #00FF00');
+        $('.div-tweet-photo-text').eq(0).css('box-shadow', '0px 0px 15px #FF0000');
     }
     $('.button').show();
 });
 
-$('#right-tweet').click(function() {
+$('.div-tweet-photo-text').eq(1).click(function() {
     if ($('#right-tweet').text() == real) {
-        $('.white-text').text('Correct!');
+        $('.h2-white-text').text('Correct!');
+        $('.h2-white-text').css('text-shadow', '0px 0px 15px #00FF00');
+        $('.div-tweet-photo-text').eq(1).css('box-shadow', '0px 0px 15px #00FF00');
+        $('.div-tweet-photo-text').eq(0).css('box-shadow', '0px 0px 15px #FF0000');
+        $('.button').css('background-color', 'rgba(0, 255, 0, 0.6)');
+        $('.button').css('color', 'rgba(0, 0, 0, 0.6)');
     }
     else {
-        $('.white-text').text('Incorrect! SAD');
+        $('.h2-white-text').text('Incorrect! SAD');
+        $('.div-tweet-photo-text').eq(0).css('box-shadow', '0px 0px 15px #00FF00');
+        $('.div-tweet-photo-text').eq(1).css('box-shadow', '0px 0px 15px #FF0000');
     }
     $('.button').show();
 });

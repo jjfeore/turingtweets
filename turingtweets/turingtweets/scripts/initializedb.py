@@ -2,7 +2,7 @@ import os
 import sys
 import transaction
 import json
-
+import html
 from pyramid.paster import (
     get_appsettings,
     setup_logging,
@@ -53,11 +53,12 @@ def main(argv=sys.argv):
             json_data = json.load(json_file)
 
         for tweet_item in json_data:
+            one_tweet = html.unescape(tweet_item['text'])
             new_tweet = Tweet(
-                tweet=tweet_item['text']
+                tweet=one_tweet
             )
             models.append(new_tweet)
-            tweet_list.append(tweet_item['text'])
+            tweet_list.append(one_tweet)
 
         fourgrams(tweet_list)
 
