@@ -1,6 +1,6 @@
 import os
 import tweepy
-from turingtweets.models import get_engine
+from .models import get_engine
 from sqlalchemy.orm import sessionmaker
 from turingtweets.models.mymodel import FakeTweet
 
