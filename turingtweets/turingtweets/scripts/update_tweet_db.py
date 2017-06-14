@@ -19,10 +19,10 @@ def update_tweet_db():
     list_of_tweets = get_tweets(api, "nhuntwalker")
     tweet_objects = []
     for tweet in list_of_tweets:
-        print("Inside of update_tweet_db: {}".format(tweet))
         tweet_objects.append(Tweet(tweet=tweet))
     session.add_all(tweet_objects)
     session.commit()
+    print('This is printing.')
 
 
 def authenticate_with_twitter():
