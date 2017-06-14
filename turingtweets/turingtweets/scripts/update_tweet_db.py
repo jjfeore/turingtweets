@@ -3,22 +3,32 @@ import datetime
 import tweepy
 from turingtweets.models import get_engine
 from sqlalchemy.orm import sessionmaker
-from turingtweets.models.mymodel import FakeTweet
+from turingtweets.models.mymodel import Tweet
 
 
 def update_tweet_db():
+    """
+    This function updates the database with tweets from the last 24 hours.
+    """
     test_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
     print(os.environ.get('DATABASE_URL'))
     engine = get_engine(test_dict)
-    print(engine)
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
     api = authenticate_with_twitter()
-    get_tweets(api, "nhuntwalker")
-    list_of_tweets = []
+    list_of_tweets = get_tweets(api, "nhuntwalker")
+    tweet_objects = []
+    for tweet in list_of_tweets:
+        print("Inside of update_tweet_db: {}".format(tweet))
+        tweet_objects.append(Tweet(tweet=tweet))
+    session.add_all(tweet_objects)
+    session.commit()
 
 
 def authenticate_with_twitter():
+    """
+    This function is responsible for authenticating with Twitter.
+    """
     auth = tweepy.OAuthHandler(os.environ.get('CONSUMER_KEY'), os.environ.get('CONSUMER_SECRET'))
     auth.set_access_token(os.environ.get('ACCESS_TOKEN'), os.environ.get('ACCESS_TOKEN_SECRET'))
     api = tweepy.API(auth)
@@ -26,16 +36,15 @@ def authenticate_with_twitter():
 
 
 def get_tweets(api, username):
-    
+    """
+    This function is responsible for getting tweets from the last 24 hours.
+    """
     tweets = api.user_timeline(username, page=1)
+    list_of_tweets = []
     for tweet in tweets:
         if (datetime.datetime.now() - tweet.created_at).days < 1:
-            #Do processing here:
-            # print(tweet)
-            print(tweet.text)
-            print(tweet.created_at)
-
-            print(tweet.text.encode("utf-8"))
+            list_of_tweets.append(tweet.text)
+    return list_of_tweets
 
 
 update_tweet_db()
