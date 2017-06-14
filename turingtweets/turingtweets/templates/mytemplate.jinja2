@@ -6,20 +6,16 @@
           </h2>
     </div>
     <section class="div-two-tweets">
-      <a href="#">
         <div class="div-tweet-photo-text">
           <img id="tweet-left" class="img-tweet" src="{{ request.static_path('turingtweets:static/nicholas.png') }}" alt="" />
           </br>
-          <p class="p-tweet-text">{{ real }}</p>
+          <p class="p-tweet-text" id="left-tweet">{{ real }}</p>
         </div>
-      </a>
 
-      <a href="#">
         <div class="div-tweet-photo-text">
           <img id="tweet-right" class="img-tweet" src="{{ request.static_path('turingtweets:static/nicholas.png') }}" alt="" />
           </br>
-          <p class="p-tweet-text">{{ fake }}</p>
+          <p class="p-tweet-text" id="right-tweet">{{ fake }}</p>
         </div>
-      </a>
     </section>
 {% endblock content %}

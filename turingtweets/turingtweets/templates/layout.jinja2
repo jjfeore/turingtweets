@@ -6,7 +6,6 @@
     <title>Make Twitter Great Again | {{ page }}</title>
 </head>
     <body>
-    <!-- /*=========== Header ========== */ -->
       <div class="div-header">
         <div class="div-header-red">
           <h1 class="white-text" class="h1-title-header">
@@ -14,18 +13,14 @@
           </h1>
         </div>
       </div>
-    <!-- /*=========== Main Body ========== */ -->
       <main>
-          {% block content %}{% endblock %}
-
-          <!-- /*=========== Submit Button ========== */ -->
-          <div class="div-submit">
-          <input class="button" type="submit" value="Submit" />
+        {% block content %}{% endblock %}
+        <div class="div-submit">
+            <input class="button" type="button" value="Try Again?" />
         </div>
 
         <div class="div-spacer-submit-nav">
         </div>
-    <!-- /*=========== Navigation ========== */ -->
         <div class="div-nav">
           <nav>
             <a href="/">HOME</a> |
@@ -33,13 +28,15 @@
           </nav>
         </div>
 
-    <!-- /*=========== Footer ========== */ -->
         <footer>
-          <p>Posted by: Turing Trump Tweets</p>
-          <p>Contact information: <a href="mailto:turingtrump@gmail.com">
-           turingtrump@gmail.com</a>.</p>
+          <p>Posted by: Turing Tweets</p>
+          <p><a href="mailto:turingtrump@gmail.com">
+           Contact Us</a></p>
         </footer>
       </main>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="{{ request.static_path('turingtweets:static/js/app.js') }}"></script>
+      <script type="text/javascript">setFakeTweet()</script>
     </body>
 </html>
 
