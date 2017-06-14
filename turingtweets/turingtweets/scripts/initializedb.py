@@ -63,4 +63,4 @@ def main(argv=sys.argv):
 
         # fourgrams(tweet_list)
         dbsession.add_all(models)
-    gen_markov()
+    # gen_markov()

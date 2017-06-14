@@ -5,7 +5,6 @@ import markovify
 import redis
 import pickle
 import os
-import logging
 from turingtweets.models import get_engine
 from sqlalchemy.orm import sessionmaker
 from turingtweets.models.mymodel import Tweet
@@ -27,3 +26,7 @@ def gen_markov():
     markov_chain = markovify.NewlineText(big_corpus, state_size=3)
     to_redis = pickle.dumps(markov_chain)
     redis.from_url(host_url).set('markov_tweets', to_redis)
+
+
+if __name__ == '__main__':
+    gen_markov()
