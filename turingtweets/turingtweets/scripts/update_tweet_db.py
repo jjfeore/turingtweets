@@ -4,6 +4,7 @@ import tweepy
 from turingtweets.models import get_engine
 from sqlalchemy.orm import sessionmaker
 from turingtweets.models.mymodel import Tweet
+from turingtweets.scripts.builddict import gen_markov
 
 
 def update_tweet_db():
@@ -22,7 +23,7 @@ def update_tweet_db():
         tweet_objects.append(Tweet(tweet=tweet))
     session.add_all(tweet_objects)
     session.commit()
-    print('This is printing.')
+    gen_markov()
 
 
 def authenticate_with_twitter():
