@@ -1,7 +1,7 @@
-import schedule
-import tweepy
-import api_keys
-import time
+# import schedule
+# import tweepy
+# import api_keys
+# import time
 import os
 
 
@@ -17,20 +17,20 @@ SessionFactory = sessionmaker(bind=engine)
 session = SessionFactory()
 
 
-print("dbsession result: {}".format(session.query(FakeTweet).filter_by(tweeted=False).first()))
+print("dbsession result: {}".format(session.query(FakeTweet).filter_by(tweeted=False).first().faketweet))
 
 
-def job(tweet):
-    auth = tweepy.OAuthHandler(api_keys.consumer_key, api_keys.consumer_secret)
-    auth.set_access_token(api_keys.access_token, api_keys.access_token_secret)
-    api = tweepy.API(auth)
-    api.update_status(status=tweet)
+# def job(tweet):
+#     auth = tweepy.OAuthHandler(api_keys.consumer_key, api_keys.consumer_secret)
+#     auth.set_access_token(api_keys.access_token, api_keys.access_token_secret)
+#     api = tweepy.API(auth)
+#     api.update_status(status=tweet)
+#
+#
+# schedule.every().hour.do(job)
 
-
-schedule.every().hour.do(job)
-
-while True:
-    print("Inside of tweet_scheduler:")
-    schedule.run_pending()
-    time.sleep(1)
+# while True:
+#     print("Inside of tweet_scheduler:")
+#     schedule.run_pending()
+#     time.sleep(1)
 
