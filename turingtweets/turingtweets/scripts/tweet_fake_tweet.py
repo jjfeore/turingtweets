@@ -10,7 +10,6 @@ def get_fake_tweet():
     engine = get_engine(test_dict)
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
-    import pdb; pdb.set_trace()
     if session.query(FakeTweet).filter_by(tweeted=False).first():
         fake_tweet = session.query(FakeTweet).filter_by(tweeted=False).first().faketweet
         session.query(FakeTweet).filter(FakeTweet.faketweet == fake_tweet).update({'tweeted':True})
