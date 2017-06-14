@@ -14,8 +14,10 @@ def update_tweet_db():
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
     api = authenticate_with_twitter()
-    get_tweets(api, "nhuntwalker")
-    list_of_tweets = []
+    list_of_tweets = get_tweets(api, "nhuntwalker")
+    print(list_of_tweets)
+    for tweet in list_of_tweets:
+        print("Inside of update_tweet_db: {}".format(tweet))
 
 
 def authenticate_with_twitter():
@@ -26,16 +28,12 @@ def authenticate_with_twitter():
 
 
 def get_tweets(api, username):
-    
     tweets = api.user_timeline(username, page=1)
+    list_of_tweets = []
     for tweet in tweets:
         if (datetime.datetime.now() - tweet.created_at).days < 1:
-            #Do processing here:
-            # print(tweet)
-            print(tweet.text)
-            print(tweet.created_at)
-
-            print(tweet.text.encode("utf-8"))
+            list_of_tweets.append(tweet.text)
+    return list_of_tweets
 
 
 update_tweet_db()
