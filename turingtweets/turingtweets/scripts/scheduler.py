@@ -1,8 +1,8 @@
-import schedule
-import tweepy
-import time
-import os
-from turingtweets.scripts.tweet_fake_tweet import get_fake_tweet, tweet_fake_tweet
+# import schedule
+# import tweepy
+# import time
+# import os
+# from turingtweets.scripts.tweet_fake_tweet import get_fake_tweet, tweet_fake_tweet
 # from turingtweets.scripts.update_tweet_db import <FUNCTIONS TO IMPORT>
 
 

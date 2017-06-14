@@ -61,12 +61,5 @@ def main(argv=sys.argv):
             models.append(new_tweet)
             tweet_list.append(one_tweet)
 
-        a_fake_tweet = FakeTweet(
-            faketweet="Just pooped my pants. HUGE!",
-            tweeted=False,
-            shown=0,
-            chosen=0
-        )
         fourgrams(tweet_list)
-        dbsession.add(a_fake_tweet)
         dbsession.add_all(models)

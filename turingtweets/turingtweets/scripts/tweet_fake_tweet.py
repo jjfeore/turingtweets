@@ -1,7 +1,10 @@
 import os
+import tweepy
 from turingtweets.models import get_engine
 from sqlalchemy.orm import sessionmaker
 from turingtweets.models.mymodel import FakeTweet
+
+# MAKE SURE IT DOESN'T CRASH WHEN FAKE TWEET DB IS EMPTY
 
 
 def get_fake_tweet():
@@ -11,7 +14,11 @@ def get_fake_tweet():
     print(engine)
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
-    return session.query(FakeTweet).filter_by(tweeted=False).first().faketweet
+    fake_tweet = session.query(FakeTweet).filter_by(tweeted=False).first().faketweet
+    session.query(FakeTweet).filter(FakeTweet.faketweet == fake_tweet).update({'tweeted':True})
+    session.commit()
+    print(fake_tweet)
+    return fake_tweet
 
 
 def tweet_fake_tweet(tweet):
@@ -19,3 +26,6 @@ def tweet_fake_tweet(tweet):
     auth.set_access_token(os.environ.get('ACCESS_TOKEN'), os.environ.get('ACCESS_TOKEN_SECRET'))
     api = tweepy.API(auth)
     api.update_status(status=tweet)
+
+
+tweet_fake_tweet(get_fake_tweet())

@@ -22,7 +22,6 @@ def home_view(request):
     real_tweet = session.query(Tweet).get(rand_tweet)
     fake_tweet = gen_tweet()
     if request.method == "POST" and request.POST:
-        import pdb; pdb.set_trace()
         new_entry = FakeTweet(
             faketweet=request.POST['fakeTweet'],
             tweeted=False,
