@@ -49,7 +49,7 @@ h2 {
   padding-right: 20px;
   display: inline-block;
   opacity: .6;
-  margin: 20px 0 20px 0;
+  margin: 20px 0 0.5em 0;
 }
 
 
@@ -57,6 +57,9 @@ h2 {
 
 .div-two-tweets {
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin: auto;
 }
 
 .div-tweet-photo-text {
@@ -67,9 +70,10 @@ h2 {
   text-align: left;
   border: 1px solid #e6ecf0;
   border-radius: 10px;
-  margin: 1em 2em 2em;
+  margin: 0.5em 2em 2em;
   padding-bottom: 10px;
   cursor: pointer;
+  vertical-align: top;
 }
 
 .img-tweet {
