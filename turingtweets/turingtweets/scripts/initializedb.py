@@ -9,6 +9,7 @@ from pyramid.paster import (
 )
 
 from ..models.mymodel import Tweet
+from ..models.mymodel import FakeTweet
 from turingtweets.scripts.builddict import fourgrams
 from pyramid.scripts.common import parse_vars
 
@@ -48,7 +49,7 @@ def main(argv=sys.argv):
         dbsession = get_tm_session(session_factory, transaction.manager)
 
         HERE = os.path.dirname(__file__)
-
+        
         with open(os.path.join(HERE, '../models/nhuntwalker_short.json'), 'r', encoding='utf-8') as json_file:
             json_data = json.load(json_file)
 
@@ -60,6 +61,12 @@ def main(argv=sys.argv):
             models.append(new_tweet)
             tweet_list.append(one_tweet)
 
+        a_fake_tweet = FakeTweet(
+            faketweet="Just pooped my pants. HUGE!",
+            tweeted=False,
+            shown=0,
+            chosen=0
+        )
         fourgrams(tweet_list)
-
+        dbsession.add(a_fake_tweet)
         dbsession.add_all(models)

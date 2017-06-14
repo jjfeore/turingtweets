@@ -11,6 +11,8 @@ import random
 from turingtweets.views.nlp import gen_tweet
 
 
+
+
 @view_config(route_name='home', renderer='../templates/mytemplate.jinja2')
 def home_view(request):
     """View for home route."""

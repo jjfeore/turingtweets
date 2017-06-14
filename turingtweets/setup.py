@@ -23,6 +23,7 @@ requires = [
     'psycopg2',
     'markovify',
     'tweepy',
+    'schedule'
 ]
 
 tests_require = [
