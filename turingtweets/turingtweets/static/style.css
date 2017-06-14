@@ -64,6 +64,7 @@ h2 {
 
 .div-tweet-photo-text {
   background: white;
+  font-family: Helvetica, sans-serif;
   height: 12em;
   width: 440px;
   display: inline-block;
