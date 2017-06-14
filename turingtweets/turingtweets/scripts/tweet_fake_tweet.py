@@ -11,9 +11,11 @@ def get_fake_tweet():
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
     if session.query(FakeTweet).filter_by(tweeted=False).first():
+        print('we have a tweet to tweet.')
         fake_tweet = session.query(FakeTweet).filter_by(tweeted=False).first().faketweet
         session.query(FakeTweet).filter(FakeTweet.faketweet == fake_tweet).update({'tweeted':True})
         session.commit()
+        print(fake_tweet)
         tweet_fake_tweet(fake_tweet)
 
 
