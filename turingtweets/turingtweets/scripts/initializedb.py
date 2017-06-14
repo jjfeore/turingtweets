@@ -2,6 +2,7 @@ import os
 import sys
 import transaction
 import json
+# from turingtweets.scripts.tweet_scheduler import job
 
 from pyramid.paster import (
     get_appsettings,
@@ -9,6 +10,7 @@ from pyramid.paster import (
 )
 
 from ..models.mymodel import Tweet
+from ..models.mymodel import FakeTweet
 from turingtweets.scripts.builddict import fourgrams
 from pyramid.scripts.common import parse_vars
 
@@ -59,6 +61,13 @@ def main(argv=sys.argv):
             models.append(new_tweet)
             tweet_list.append(tweet_item['text'])
 
+        a_fake_tweet = FakeTweet(
+            faketweet="from now on my lectures will be semi-intelligible complete nonsense",
+            tweeted=False,
+            shown=0,
+            chosen=0
+        )
         fourgrams(tweet_list)
-
+        # models.append(a_fake_tweet)
+        dbsession.add([a_fake_tweet])
         dbsession.add_all(models)
