@@ -20,7 +20,6 @@ def update_tweet_db():
     list_of_tweets = get_tweets(api, "nhuntwalker")
     tweet_objects = []
     for tweet in list_of_tweets:
-        print("Inside of update_tweet_db: {}".format(tweet))
         tweet_objects.append(Tweet(tweet=tweet))
     session.add_all(tweet_objects)
     session.commit()
@@ -49,4 +48,5 @@ def get_tweets(api, username):
     return list_of_tweets
 
 
-update_tweet_db()
+if __name__ == "__main__":
+    update_tweet_db()

@@ -1,20 +1,12 @@
-# import schedule
-# import tweepy
-# import time
-# import os
+# from apscheduler.schedulers.blocking import BlockingScheduler
 # from turingtweets.scripts.tweet_fake_tweet import get_fake_tweet, tweet_fake_tweet
-# from turingtweets.scripts.update_tweet_db import <FUNCTIONS TO IMPORT>
-
-
-############### SCHEDULE TEMPLATE ##############
-# def job():
-#     print("I'm working...")
+# import logging
 #
-# schedule.every().hour.do(job)
-# schedule.every().day.at("10:30").do(job)
-# schedule.every().monday.do(job)
-# schedule.every().wednesday.at("13:15").do(job)
+# sched = BlockingScheduler()
 #
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
+# @sched.scheduled_job('interval', minutes=1)
+# def timed_job():
+#     logging.exception('THIS JOB IS RUN EVERY MINUTE.')
+#
+#
+# sched.start()
