@@ -25,4 +25,4 @@ def tweet_fake_tweet(tweet):
     api.update_status(status=tweet)
 
 
-get_fake_tweet()
+# get_fake_tweet()

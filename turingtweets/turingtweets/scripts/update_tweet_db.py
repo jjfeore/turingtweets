@@ -47,4 +47,4 @@ def get_tweets(api, username):
     return list_of_tweets
 
 
-update_tweet_db()
+# update_tweet_db()
