@@ -10,7 +10,7 @@ from pyramid.paster import (
 
 from turingtweets.models.mymodel import Tweet
 from turingtweets.models.mymodel import FakeTweet
-from turingtweets.scripts.builddict import fourgrams
+from turingtweets.scripts.builddict import gen_markov
 from pyramid.scripts.common import parse_vars
 
 from turingtweets.models.meta import Base
@@ -49,7 +49,7 @@ def main(argv=sys.argv):
         dbsession = get_tm_session(session_factory, transaction.manager)
 
         HERE = os.path.dirname(__file__)
-        
+
         with open(os.path.join(HERE, '../models/realdonaldtrump_short.json'), 'r', encoding='utf-8') as json_file:
             json_data = json.load(json_file)
 
@@ -61,5 +61,6 @@ def main(argv=sys.argv):
             models.append(new_tweet)
             tweet_list.append(one_tweet)
 
-        fourgrams(tweet_list)
+        # fourgrams(tweet_list)
         dbsession.add_all(models)
+    gen_markov()

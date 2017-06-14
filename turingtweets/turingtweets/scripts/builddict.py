@@ -6,18 +6,24 @@ import redis
 import pickle
 import os
 import logging
+from turingtweets.models import get_engine
+from sqlalchemy.orm import sessionmaker
+from turingtweets.models.mymodel import Tweet
 
 
-def fourgrams(tweets):
-    """Add a dictionary of Markov chains to the models."""
+def gen_markov():
+    """Compile all the tweets and create a Markov chain."""
     host_url = os.environ.get('REDIS_URL')
-    markov_list = []
+    access_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
+    engine = get_engine(access_dict)
+    SessionFactory = sessionmaker(bind=engine)
+    session = SessionFactory()
+
+    tweets = session.query(Tweet).all()
+
+    big_corpus = ''
     for tweet in tweets:
-        try:
-            markov_list.append(markovify.Text(tweet, state_size=2))
-        except Exception:
-            logging.exception('Markov doesn\'t like parens or quotes')
-            pass
-    markov_list = markovify.combine(markov_list)
-    to_redis = pickle.dumps(markov_list)
+        big_corpus += tweet.tweet + '\n'
+    markov_chain = markovify.NewlineText(big_corpus, state_size=3)
+    to_redis = pickle.dumps(markov_chain)
     redis.from_url(host_url).set('markov_tweets', to_redis)
