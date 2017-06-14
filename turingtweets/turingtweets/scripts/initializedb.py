@@ -68,6 +68,5 @@ def main(argv=sys.argv):
             chosen=0
         )
         fourgrams(tweet_list)
-        # models.append(a_fake_tweet)
         dbsession.add(a_fake_tweet)
         dbsession.add_all(models)

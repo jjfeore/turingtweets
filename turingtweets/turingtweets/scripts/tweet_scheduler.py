@@ -1,7 +1,6 @@
-# import schedule
-# import tweepy
-# import api_keys
-# import time
+import schedule
+import tweepy
+import time
 import os
 
 
@@ -17,17 +16,18 @@ SessionFactory = sessionmaker(bind=engine)
 session = SessionFactory()
 
 
-print("dbsession result: {}".format(session.query(FakeTweet).filter_by(tweeted=False).first().faketweet))
+faketweet = session.query(FakeTweet).filter_by(tweeted=False).first().faketweet
 
 
-# def job(tweet):
-#     auth = tweepy.OAuthHandler(api_keys.consumer_key, api_keys.consumer_secret)
-#     auth.set_access_token(api_keys.access_token, api_keys.access_token_secret)
-#     api = tweepy.API(auth)
-#     api.update_status(status=tweet)
-#
-#
+def job(tweet):
+    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+    api = tweepy.API(auth)
+    api.update_status(status=tweet)
+
+
 # schedule.every().hour.do(job)
+job(faketweet)
 
 # while True:
 #     print("Inside of tweet_scheduler:")
