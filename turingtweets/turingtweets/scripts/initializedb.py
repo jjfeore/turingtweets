@@ -8,13 +8,13 @@ from pyramid.paster import (
     setup_logging,
 )
 
-from ..models.mymodel import Tweet
-from ..models.mymodel import FakeTweet
+from turingtweets.models.mymodel import Tweet
+from turingtweets.models.mymodel import FakeTweet
 from turingtweets.scripts.builddict import fourgrams
 from pyramid.scripts.common import parse_vars
 
-from ..models.meta import Base
-from ..models import (
+from turingtweets.models.meta import Base
+from turingtweets.models import (
     get_engine,
     get_session_factory,
     get_tm_session,
@@ -50,7 +50,7 @@ def main(argv=sys.argv):
 
         HERE = os.path.dirname(__file__)
         
-        with open(os.path.join(HERE, '../models/nhuntwalker_short.json'), 'r', encoding='utf-8') as json_file:
+        with open(os.path.join(HERE, '../models/realdonaldtrump_short.json'), 'r', encoding='utf-8') as json_file:
             json_data = json.load(json_file)
 
         for tweet_item in json_data:
