@@ -5,11 +5,8 @@ from pyramid.response import Response
 from pyramid.view import view_config
 from sqlalchemy.exc import DBAPIError
 from turingtweets.models import mymodel
-from ..models import Tweet
-from pyramid.httpexceptions import (
-    HTTPNotFound,
-    HTTPFound
-)
+from ..models import Tweet, FakeTweet
+from pyramid.httpexceptions import HTTPNotFound
 import random
 from turingtweets.views.nlp import gen_tweet
 
@@ -24,7 +21,15 @@ def home_view(request):
     rand_tweet = random.randint(1, tweet_ct)
     real_tweet = session.query(Tweet).get(rand_tweet)
     fake_tweet = gen_tweet()
-
+    if request.method == "POST" and request.POST:
+        new_entry = FakeTweet(
+            faketweet=request.POST['faketweet'],
+            tweeted=False,
+            shown=1,
+            chosen=1
+        )
+        request.dbsession.add(new_entry)
+        return {}
     return {
         'page': 'Home',
         'real': real_tweet.tweet,
