@@ -62,7 +62,7 @@ def main(argv=sys.argv):
             tweet_list.append(tweet_item['text'])
 
         a_fake_tweet = FakeTweet(
-            faketweet="from now on my lectures will be semi-intelligible complete nonsense",
+            faketweet="Just pooped my pants. HUGE!",
             tweeted=False,
             shown=0,
             chosen=0
