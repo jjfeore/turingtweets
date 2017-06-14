@@ -4,6 +4,7 @@ import tweepy
 from turingtweets.models import get_engine
 from sqlalchemy.orm import sessionmaker
 from turingtweets.models.mymodel import Tweet
+from turingtweets.scripts.builddict import gen_markov
 
 
 def update_tweet_db():
@@ -19,10 +20,10 @@ def update_tweet_db():
     list_of_tweets = get_tweets(api, "nhuntwalker")
     tweet_objects = []
     for tweet in list_of_tweets:
-        print("Inside of update_tweet_db: {}".format(tweet))
         tweet_objects.append(Tweet(tweet=tweet))
     session.add_all(tweet_objects)
     session.commit()
+    gen_markov()
 
 
 def authenticate_with_twitter():

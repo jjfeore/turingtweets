@@ -10,12 +10,15 @@ def get_fake_tweet():
     engine = get_engine(test_dict)
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
+    print('Inside of get_fake_tweet')
     if session.query(FakeTweet).filter_by(tweeted=False).first():
         fake_tweet = session.query(FakeTweet).filter_by(tweeted=False).first().faketweet
+        print('Inside of get_fake_tweet')
         session.query(FakeTweet).filter(FakeTweet.faketweet == fake_tweet).update({'tweeted':True})
         session.commit()
         print(fake_tweet)
         tweet_fake_tweet(fake_tweet)
+        print('This is printing.')
 
 
 def tweet_fake_tweet(tweet):
