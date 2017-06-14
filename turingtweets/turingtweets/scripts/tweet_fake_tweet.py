@@ -10,6 +10,7 @@ def get_fake_tweet():
     engine = get_engine(test_dict)
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
+    print('running tweet_fake_tweet...')
     if session.query(FakeTweet).filter_by(tweeted=False).first():
         print('we have a tweet to tweet.')
         fake_tweet = session.query(FakeTweet).filter_by(tweeted=False).first().faketweet
@@ -27,4 +28,5 @@ def tweet_fake_tweet(tweet):
 
 
 if __name__ == "__main__":
+    print('running tweet_fake_tweet...')
     get_fake_tweet()
