@@ -47,4 +47,5 @@ def get_tweets(api, username):
     return list_of_tweets
 
 
-# update_tweet_db()
+if __name__ == "__main__":
+    update_tweet_db()

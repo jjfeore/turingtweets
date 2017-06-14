@@ -25,4 +25,5 @@ def tweet_fake_tweet(tweet):
     api.update_status(status=tweet)
 
 
-# get_fake_tweet()
+if __name__ == "__main__":
+    get_fake_tweet()
