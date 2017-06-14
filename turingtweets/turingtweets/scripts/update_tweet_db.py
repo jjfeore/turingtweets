@@ -12,12 +12,11 @@ def update_tweet_db():
     This function updates the database with tweets from the last 24 hours.
     """
     test_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
-    print(os.environ.get('DATABASE_URL'))
     engine = get_engine(test_dict)
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
     api = authenticate_with_twitter()
-    list_of_tweets = get_tweets(api, "nhuntwalker")
+    list_of_tweets = get_tweets(api, "realdonaldtrump")
     tweet_objects = []
     for tweet in list_of_tweets:
         tweet_objects.append(Tweet(tweet=tweet))
