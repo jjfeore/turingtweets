@@ -35,13 +35,14 @@ $('.div-tweet-photo-text').eq(0).click(function() {
         $('.button').css('color', 'rgba(0, 0, 0, 0.6)');
     }
     else {
-        $('.h2-white-text').text('Incorrect! SAD');
+        $('.h2-white-text').text('Incorrect!');
         $('.h2-white-text').css('text-shadow', '0px 0px 15px #FF0000');
         $('.h2-white-text').css('color', 'white');
         $('.div-tweet-photo-text').eq(1).css('box-shadow', '0px 0px 15px #00FF00');
         $('.div-tweet-photo-text').eq(0).css('box-shadow', '0px 0px 15px #FF0000');
         $('.button').css('background-color', 'rgba(255, 0, 0, 0.6)');
         $('.button').css('color', 'white');
+        $('#twitter-info').show();
         $.post('/', {fakeTweet:fake});
     }
     $('.button').show();
@@ -59,13 +60,14 @@ $('.div-tweet-photo-text').eq(1).click(function() {
         $('.button').css('color', 'rgba(0, 0, 0, 0.6)');
     }
     else {
-        $('.h2-white-text').text('Incorrect! SAD');
+        $('.h2-white-text').text('Incorrect!');
         $('.h2-white-text').css('text-shadow', '0px 0px 15px #FF0000');
         $('.h2-white-text').css('color', 'white');
         $('.div-tweet-photo-text').eq(0).css('box-shadow', '0px 0px 15px #00FF00');
         $('.div-tweet-photo-text').eq(1).css('box-shadow', '0px 0px 15px #FF0000');
         $('.button').css('background-color', 'rgba(255, 0, 0, 0.6)');
         $('.button').css('color', 'white');
+        $('#twitter-info').show();
         $.post('/', {fakeTweet:fake});
     }
     $('.button').show();
