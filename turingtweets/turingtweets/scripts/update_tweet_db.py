@@ -11,7 +11,7 @@ def update_tweet_db():
     """
     This function updates the database with tweets from the last 24 hours.
     """
-    test_dict = {'sqlalchemy.url': os.environ.get('HEROKU_POSTGRESQL_COBALT_URL')}
+    test_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
     engine = get_engine(test_dict)
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()

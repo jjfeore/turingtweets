@@ -13,7 +13,7 @@ from turingtweets.models.mymodel import Tweet
 def gen_markov():
     """Compile all the tweets and create a Markov chain."""
     host_url = os.environ.get('REDIS_URL')
-    access_dict = {'sqlalchemy.url': os.environ.get('HEROKU_POSTGRESQL_COBALT_URL')}
+    access_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
     engine = get_engine(access_dict)
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
