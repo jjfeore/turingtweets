@@ -136,29 +136,29 @@ def test_home_view_returns_404(testapp_route):
 
 
 def test_p_tags_are_populated(testapp_route):
+    """<p> populated with actual text."""
+    response = testapp_route.get('/', status=200)
+    html = response.html
+    assert html.getText('p') is not None
 
 
-#
-#
 # # ============Tests for About view routes===============
-#
-#
-# def test_about_route_returns_response(dummy_request):
-#     """About view returns a Response Object."""
-#     from turingtweets.views.default import about_view
-#     response = about_view(dummy_request)
-#     assert isinstance(response, Response)
-#
-#
-# def test_about_view_is_good(dummy_request):
-#     """About view response has a status 200 OK."""
-#     from turingtweets.views.default import about_view
-#     response = about_view(dummy_request)
-#     assert response.status_code == 200
-#
-#
-# def test_about_view_returns_proper_content(dummy_request):
-#     """About view response has file content."""
-#     from turingtweets.views.default import about_view
-#     response = about_view(dummy_request)
-#     assert "Make Twitter Great Again" in response.text
+
+
+def test_about_view_returns_200(testapp_route):
+    """About view response has 200."""
+    response = testapp_route.get('/about', status=200)
+    assert response.status_code == 200
+
+
+def test_about_view_returns_404(testapp_route):
+    """About view bad request response has 404."""
+    response = testapp_route.get('/about/poop', status=404)
+    assert response.status_code == 404
+
+def test_img_tags_are_populated(testapp_route):
+    """<img> populated with 4 photos."""
+    response = testapp_route.get('/about', status=200)
+    html = response.html
+    import pdb; pdb.set_trace()
+    assert len(html.findAll('img')) == 4
