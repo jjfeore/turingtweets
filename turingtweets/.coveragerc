@@ -4,14 +4,12 @@ omit =
   turingtweets/test
   turingtweets/test*
   turingtweets/models/*
-  turingtweets/scripts/*
+  turingtweets/scripts/initializedb.py
   turingtweets/templates/*
   turingtweets/views/notfound.py
   turingtweets/views/__init__.py
   turingtweets/routes.py
   turingtweets/__init__.py
-  turingtweets/views/default.json_fake
-
 
 [report]
 show_missing = True

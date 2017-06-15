@@ -109,8 +109,24 @@ def home_response():
     response = home_view(request)
     return response
 
-# ============Tests for Home view routes===============
+    # ============Test of POST request===============
 
+
+@pytest.fixture
+def post_request(dummy_request):
+    dummy_request.method = "POST"
+    return dummy_request
+
+
+def test_create_post_request(post_request):
+    from turingtweets.views.default import home_view
+    data = {'fakeTweet': 'I would rather run against Crooked Hillary Clinton, I am running for president and law prohibits. LOVE!'}
+    post_request.POST = data
+    response = home_view(post_request)
+    import pdb; pdb.set_trace()
+    assert response == {}
+
+    # ============Tests for Home view routes===============
 
 def test_home_route_returns_response_is_dict(dummy_request):
     """Home view returns a Response Object is dict."""
@@ -202,19 +218,17 @@ def test_h1_tags_are_populated(testapp_route):
     assert 'Documentation' in html.text
 
 
-def test_doc_view_is_good_dict_has_property(dummy_request):
-    """Home view response dict has property."""
+def test_doc_view_is_good_content(dummy_request):
+    """Doc view response dict has property."""
     from turingtweets.views.default import doc_view
     response = doc_view(dummy_request)
-    # import pdb; pdb.set_trace()
     assert response['page'] == 'Documentation'
 
 
-def test_about_view_is_good_dict_has_property(dummy_request):
-    """Home view response dict has property."""
+def test_about_view_is_good_content(dummy_request):
+    """About view response dict has property."""
     from turingtweets.views.default import about_view
     response = about_view(dummy_request)
-    # import pdb; pdb.set_trace()
     assert response['page'] == 'About the Team'
 
 # # ============Tests for Real JSON route===============
