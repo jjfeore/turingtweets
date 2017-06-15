@@ -1,13 +1,14 @@
-"""
-Tests for turing tweets
-"""
+"""Test for turingtweets."""
 import pytest
 import os
+import json
 from pyramid import testing
 from pyramid.response import Response
-from turingtweets.models.mymodel import Tweet
+from turingtweets.models.mymodel import Tweet, FakeTweet
 from pyramid.httpexceptions import HTTPNotFound
 from turingtweets.models.meta import Base
+from turingtweets.models import get_engine
+from sqlalchemy.orm import sessionmaker
 
 SITE_ROOT = 'http://localhost'
 
@@ -31,8 +32,8 @@ def configuration(request):
 @pytest.fixture
 def db_session(configuration, request):
     """Create a session for interacting with the test database."""
-    SessionFactory = configuration.registry["dbsession_factory"]
-    session = SessionFactory()
+    session_factory = configuration.registry["dbsession_factory"]
+    session = session_factory()
     engine = session.bind
     Base.metadata.create_all(engine)
     a_tweet = Tweet(tweet='poop')
@@ -57,9 +58,10 @@ def dummy_request(db_session):
 
 @pytest.fixture
 def post_request(dummy_request):
-    """Creates a dummy post request."""
+    """Create a dummy post request."""
     dummy_request.method = "POST"
     return dummy_request
+
 
 @pytest.fixture
 def testapp_route():
@@ -69,14 +71,15 @@ def testapp_route():
     app = main({})
     return TestApp(app)
 
+
 @pytest.fixture(scope='session')
 def test_app(request):
+    """Instantiate a turing tweet app for testing."""
     from webtest import TestApp
     from pyramid.config import Configurator
 
     def main(global_config, **settings):
-        """ This function returns a Pyramid WSGI application.
-        """
+        """Return a Pyramid WSGI application."""
         settings['sqlalchemy.url'] = os.environ.get('DATABASE_URL_TESTING')
         config = Configurator(settings=settings)
         config.include('pyramid_jinja2')
@@ -88,8 +91,8 @@ def test_app(request):
     app = main({})
     testapp = TestApp(app)
 
-    SessionFactory = app.registry["dbsession_factory"]
-    engine = SessionFactory().bind
+    session_factory = app.registry["dbsession_factory"]
+    engine = session_factory().bind
     Base.metadata.create_all(bind=engine)
 
     def tearDown():
@@ -156,9 +159,80 @@ def test_about_view_returns_404(testapp_route):
     response = testapp_route.get('/about/poop', status=404)
     assert response.status_code == 404
 
+
 def test_img_tags_are_populated(testapp_route):
     """<img> populated with 4 photos."""
     response = testapp_route.get('/about', status=200)
     html = response.html
-    import pdb; pdb.set_trace()
     assert len(html.findAll('img')) == 4
+
+
+# # ============Tests for Real JSON route===============
+
+
+def test_real_json_returns_200(testapp_route):
+    """Real JSON route response has 200."""
+    response = testapp_route.get('/real', status=200)
+    assert response.status_code == 200
+
+
+def test_real_json_is_populated(testapp_route):
+    """Real JSON route has key of 'tweet'."""
+    response = testapp_route.get('/real', status=200)
+    assert response.json['tweet'] is not ''
+
+
+def test_real_json_is_real_tweet(testapp_route):
+    """Real JSON response is a real tweet."""
+    response = testapp_route.get('/real', status=200)
+    HERE = os.path.dirname(__file__)
+    with open(os.path.join(HERE, 'models/realdonaldtrump_short.json'), 'r', encoding='utf-8') as json_file:
+        json_data = json.load(json_file)
+    tweet_list = []
+    for tweet in json_data:
+        tweet_list.append(tweet['text'])
+    assert response.json['tweet'] in tweet_list
+
+
+# # ============Tests for Fake JSON route===============
+
+
+def test_fake_json_returns_200(testapp_route):
+    """Fake JSON route response has 200."""
+    response = testapp_route.get('/fake', status=200)
+    assert response.status_code == 200
+
+
+def test_fake_json_is_populated(testapp_route):
+    """Fake JSON route has key of 'tweet'."""
+    response = testapp_route.get('/real', status=200)
+    assert response.json['tweet'] is not ''
+
+
+# # ============Tests for Validated Fake JSON route===============
+
+
+def test_fake_val_json_returns_200(testapp_route):
+    """Validated fake JSON route response has 200."""
+    response = testapp_route.get('/fake-validated', status=200)
+    assert response.status_code == 200
+
+
+def test_fake_val_json_is_populated(testapp_route):
+    """Validated fake JSON route has key of 'tweet'."""
+    response = testapp_route.get('/fake-validated', status=200)
+    assert response.json['tweet'] is not ''
+
+
+def test_fake_val_json_is_in_fake_db(testapp_route):
+    """Validated fake JSON response is a fake tweet in the DB."""
+    response = testapp_route.get('/fake-validated', status=200)
+    access_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
+    engine = get_engine(access_dict)
+    session_factory = sessionmaker(bind=engine)
+    session = session_factory()
+    fake_tweets = session.query(FakeTweet).all()
+    tweet_list = []
+    for tweet in fake_tweets:
+        tweet_list.append(tweet.faketweet)
+    assert response.json['tweet'] in tweet_list
