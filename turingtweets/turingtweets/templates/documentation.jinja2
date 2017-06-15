@@ -1,6 +1,32 @@
 {% extends "layout.jinja2" %}
 {% block content %}
   <div class="div-main-about-wrapper">
-  blorp
+    <div id="doc-block">
+      <h2>Documentation</h2>
+      <h3>About</h3>
+      <hr>
+      <p>We conceived of Turing Trump as a way of building a better Twitter bot. By combining the typical approach, of using Markov chains to generate new text, with user validation, we are able to train the Twitter bot to use only those tweets which have already succeeded in fooling a user. All the user-validated tweets are fed into a database so that they can be tweeted later by <a href="https://twitter.com/turingtrump">@turingtrump</a>.</p>
+
+      <h3>Get Real Tweet</h3>
+      <hr>
+      <p>Retrieve a random real tweet from the database of @realDonaldTrump's scraped tweets. This database includes about 15,000 of his last tweets.</p>
+      <pre>GET https://turingtweets.herokuapp.com/real</pre>
+      <p>Returns</p>
+      <pre>{"tweet": "I have always done well with properties fronting on oceans, lakes and rivers. If something works, stay with it."}</pre>
+
+      <h3>Get Fake Tweet</h3>
+      <hr>
+      <p>Retrieve a random fake tweet generated via Markov chains. The Markov chains reference our entire database of real Trump tweets. The algorithm will only return a fake tweet that is sufficiently different from any real tweets. It will not reproduce an existing tweet.</p>
+      <pre>GET https://turingtweets.herokuapp.com/fake</pre>
+      <p>Returns</p>
+      <pre>{"tweet": "For you newcomers, George Ross was one of the dumbest racists around - an arrogant dope with no talent."}</pre>
+
+      <h3>Get User-Validated Fake Tweet</h3>
+      <hr>
+      <p>Retrieve a random user-validated fake tweet. All the tweets from this database are ones that have succeeded in fooling a user at some point. Will return None if there are no tweets in the database.</p>
+      <pre>GET https://turingtweets.herokuapp.com/fake-validated</pre>
+      <p>Returns</p>
+      <pre>{"tweet": "Michael Vick of the Philadelphia @eagles is a great man &amp; great leader."}</pre>
+    </div>
   </div>
 {% endblock content %}

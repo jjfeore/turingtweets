@@ -145,21 +145,14 @@ h2 {
 }
 
 
-/*=========== Footer ========== */
+/*=========== Documentation ========== */
 
-footer {
-  text-align: center;
-  padding-top: 5em;
+#doc-block {
+  width: 70%;
+  margin: auto;
+  text-align: left;
 }
 
-
-/*=========== MOBILE BELOW ========== */
-
-
-/*=========== MOBILE BELOW ========== */
-
-
-/*=========== MOBILE BELOW ========== */
 
 @media only screen and (max-device-width: 770px), only screen and (max-device-width: 770px) {
   /*=========== Universal========== */
