@@ -1,10 +1,15 @@
 import os
 import datetime
 import tweepy
-from turingtweets.models import get_engine
+from sqlalchemy import engine_from_config
+# from turingtweets.models import get_engine
 from sqlalchemy.orm import sessionmaker
 from turingtweets.models.mymodel import Tweet
 from turingtweets.scripts.builddict import gen_markov
+
+
+def get_engine(settings, prefix='sqlalchemy.'):
+    return engine_from_config(settings, prefix)
 
 
 def update_tweet_db():
