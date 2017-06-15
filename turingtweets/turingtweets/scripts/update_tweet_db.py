@@ -1,11 +1,63 @@
 import os
 import datetime
 import tweepy
+import markovify
+import redis
+import pickle
+
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.schema import MetaData
+
+from sqlalchemy import (
+    Column,
+    Unicode,
+    Integer,
+    Boolean,
+)
+
+
 from sqlalchemy import engine_from_config
 # from turingtweets.models import get_engine
 from sqlalchemy.orm import sessionmaker
-from turingtweets.models.mymodel import Tweet
-from turingtweets.scripts.builddict import gen_markov
+
+
+def gen_markov():
+    """Compile all the tweets and create a Markov chain."""
+    host_url = os.environ.get('REDIS_URL')
+    access_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
+    engine = get_engine(access_dict)
+    SessionFactory = sessionmaker(bind=engine)
+    session = SessionFactory()
+
+    tweets = session.query(Tweet).all()
+
+    big_corpus = ''
+    for tweet in tweets:
+        big_corpus += tweet.tweet + '\n'
+    markov_chain = markovify.NewlineText(big_corpus, state_size=3)
+    to_redis = pickle.dumps(markov_chain)
+    redis.from_url(host_url).set('markov_tweets', to_redis)
+
+
+NAMING_CONVENTION = {
+    "ix": 'ix_%(column_0_label)s',
+    "uq": "uq_%(table_name)s_%(column_0_name)s",
+    "ck": "ck_%(table_name)s_%(constraint_name)s",
+    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+    "pk": "pk_%(table_name)s"
+}
+
+metadata = MetaData(naming_convention=NAMING_CONVENTION)
+Base = declarative_base(metadata=metadata)
+
+
+class Tweet(Base):
+    """Model for a single tweet."""
+
+    __tablename__ = 'tweets'
+    id = Column(Integer, primary_key=True)
+    tweet = Column(Unicode)
+
 
 
 def get_engine(settings, prefix='sqlalchemy.'):
