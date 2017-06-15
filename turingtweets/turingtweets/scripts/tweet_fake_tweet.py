@@ -6,7 +6,7 @@ from turingtweets.models.mymodel import FakeTweet
 
 
 def get_fake_tweet():
-    test_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
+    test_dict = {'sqlalchemy.url': os.environ.get('HEROKU_POSTGRESQL_COBALT_URL')}
     engine = get_engine(test_dict)
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
