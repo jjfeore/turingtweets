@@ -2,5 +2,6 @@
 set -e
 cd turingtweets
 python setup.py develop
+initializedb production.ini
 python turingtweets/scripts/builddict.py
 python runapp.py

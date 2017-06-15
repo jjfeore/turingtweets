@@ -6,13 +6,13 @@ from turingtweets.models.mymodel import FakeTweet
 
 
 def get_fake_tweet():
-    test_dict = {'sqlalchemy.url': os.environ.get('HEROKU_POSTGRESQL_COBALT_URL')}
+    test_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
     engine = get_engine(test_dict)
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
-    print(session.query(FakeTweet).first())
-    print(session.query(FakeTweet).first().tweeted)
-    print(session.query(FakeTweet).filter(FakeTweet.tweeted==False).first())
+    # print(session.query(FakeTweet).first())
+    # print(session.query(FakeTweet).first().tweeted)
+    # print(session.query(FakeTweet).filter(FakeTweet.tweeted==False).first())
     if session.query(FakeTweet).filter_by(tweeted=False).first():
         print('we have a tweet to tweet.')
         fake_tweet = session.query(FakeTweet).filter_by(tweeted=False).first().faketweet
