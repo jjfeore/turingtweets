@@ -24,7 +24,8 @@ requires = [
     'markovify',
     'tweepy',
     'schedule',
-    'apscheduler'
+    'apscheduler',
+    'webtest',
 ]
 
 tests_require = [
