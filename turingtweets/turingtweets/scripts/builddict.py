@@ -28,5 +28,5 @@ def gen_markov():
     redis.from_url(host_url).set('markov_tweets', to_redis)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     gen_markov()

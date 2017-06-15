@@ -2,6 +2,7 @@
 import pytest
 import os
 import json
+import tweepy
 from pyramid import testing
 from pyramid.response import Response
 from turingtweets.models.mymodel import Tweet, FakeTweet
@@ -27,6 +28,15 @@ def configuration(request):
 
     request.addfinalizer(teardown)
     return config
+
+
+@pytest.fixture
+def get_api():
+    """Return the Authenticated API for Twitter."""
+    auth = tweepy.OAuthHandler(os.environ.get('CONSUMER_KEY'), os.environ.get('CONSUMER_SECRET'))
+    auth.set_access_token(os.environ.get('ACCESS_TOKEN'), os.environ.get('ACCESS_TOKEN_SECRET'))
+    api = tweepy.API(auth)
+    return api
 
 
 @pytest.fixture
@@ -138,7 +148,7 @@ def test_home_view_returns_404(testapp_route):
     assert response.status_code == 404
 
 
-def test_p_tags_are_populated(testapp_route):
+def test_home_p_tags_are_populated(testapp_route):
     """<p> populated with actual text."""
     response = testapp_route.get('/', status=200)
     html = response.html
@@ -167,7 +177,7 @@ def test_img_tags_are_populated(testapp_route):
     assert len(html.findAll('img')) == 4
 
 
-def test_p_tags_are_populated(testapp_route):
+def test_about_p_tags_are_populated(testapp_route):
     """<p> populated on about."""
     response = testapp_route.get('/about', status=200)
     html = response.html
@@ -255,8 +265,20 @@ def test_fake_json_returns_200(testapp_route):
 
 def test_fake_json_is_populated(testapp_route):
     """Fake JSON route has key of 'tweet'."""
-    response = testapp_route.get('/real', status=200)
+    response = testapp_route.get('/fake', status=200)
     assert response.json['tweet'] is not ''
+
+
+def test_fake_json_is_not_a_real_tweet(testapp_route):
+    """Fake JSON response is not a real tweet."""
+    response = testapp_route.get('/fake', status=200)
+    HERE = os.path.dirname(__file__)
+    with open(os.path.join(HERE, 'models/realdonaldtrump_short.json'), 'r', encoding='utf-8') as json_file:
+        json_data = json.load(json_file)
+    tweet_list = []
+    for tweet in json_data:
+        tweet_list.append(tweet['text'])
+    assert response.json['tweet'] not in tweet_list
 
 
 # # ============Tests for Validated Fake JSON route===============
@@ -286,3 +308,31 @@ def test_fake_val_json_is_in_fake_db(testapp_route):
     for tweet in fake_tweets:
         tweet_list.append(tweet.faketweet)
     assert response.json['tweet'] in tweet_list
+
+
+# # ============Tests for Twitter Functionality===============
+
+
+def test_get_tweets_includes_most_recent_tweet(get_api):
+    """List of tweets from get_tweets() returns most recent tweet."""
+    from turingtweets.scripts.update_tweet_db import get_tweets
+    tweet_list = get_tweets(get_api, "realdonaldtrump")
+    last_tweet = get_api.user_timeline("realdonaldtrump", count=1)[0]
+    assert last_tweet.text in tweet_list
+
+
+# # ============Tests for Fake Logic===============
+
+
+def test_gen_tweet_returns_non_real_tweet():
+    """Test that fake tweet is not in list of real tweets."""
+    from turingtweets.views.nlp import gen_tweet
+    fake_tweet = gen_tweet()
+    HERE = os.path.dirname(__file__)
+    with open(os.path.join(HERE, 'models/realdonaldtrump_short.json'), 'r', encoding='utf-8') as json_file:
+        json_data = json.load(json_file)
+    tweet_list = []
+    for tweet in json_data:
+        tweet_list.append(tweet['text'])
+    assert fake_tweet not in tweet_list
+    assert fake_tweet
