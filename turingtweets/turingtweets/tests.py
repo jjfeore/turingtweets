@@ -167,6 +167,56 @@ def test_img_tags_are_populated(testapp_route):
     assert len(html.findAll('img')) == 4
 
 
+def test_p_tags_are_populated(testapp_route):
+    """<p> populated on about."""
+    response = testapp_route.get('/about', status=200)
+    html = response.html
+    assert len(html.findAll('p')) == 8
+
+# # ============Tests for Documentation view routes===============
+
+
+def test_doc_view_returns_200(testapp_route):
+    """About view response has 200."""
+    response = testapp_route.get('/doc', status=200)
+    assert response.status_code == 200
+
+
+def test_doc_view_returns_404(testapp_route):
+    """About view bad request response has 404."""
+    response = testapp_route.get('/doc/poop', status=404)
+    assert response.status_code == 404
+
+
+def test_h3_tags_are_populated(testapp_route):
+    """<img> populated with 4 photos."""
+    response = testapp_route.get('/doc', status=200)
+    html = response.html
+    assert len(html.findAll('h3')) == 4
+
+
+def test_h1_tags_are_populated(testapp_route):
+    """<h1> populated is on page."""
+    response = testapp_route.get('/doc', status=200)
+    html = response.html
+    assert 'Documentation' in html.text
+
+
+def test_doc_view_is_good_dict_has_property(dummy_request):
+    """Home view response dict has property."""
+    from turingtweets.views.default import doc_view
+    response = doc_view(dummy_request)
+    # import pdb; pdb.set_trace()
+    assert response['page'] == 'Documentation'
+
+
+def test_about_view_is_good_dict_has_property(dummy_request):
+    """Home view response dict has property."""
+    from turingtweets.views.default import about_view
+    response = about_view(dummy_request)
+    # import pdb; pdb.set_trace()
+    assert response['page'] == 'About the Team'
+
 # # ============Tests for Real JSON route===============
 
 

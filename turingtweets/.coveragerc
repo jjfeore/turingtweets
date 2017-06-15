@@ -1,3 +1,17 @@
 [run]
 source = turingtweets
-omit = turingtweets/test*
+omit =
+  turingtweets/test
+  turingtweets/test*
+  turingtweets/models/*
+  turingtweets/scripts/*
+  turingtweets/templates/*
+  turingtweets/views/notfound.py
+  turingtweets/views/__init__.py
+  turingtweets/routes.py
+  turingtweets/__init__.py
+  turingtweets/views/default.json_fake
+
+
+[report]
+show_missing = True
