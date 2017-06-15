@@ -12,21 +12,21 @@
       <p>Retrieve a random real tweet from the database of @realDonaldTrump's scraped tweets. This database includes about 15,000 of his last tweets.</p>
       <pre>GET https://turingtweets.herokuapp.com/real</pre>
       <p>Returns</p>
-      <pre>{"tweet": "I have always done well with properties fronting on oceans, lakes and rivers. If something works, stay with it."}</pre>
+      <pre>{"tweet": "TEXT OF A REAL TWEET"}</pre>
 
       <h3>Get Fake Tweet</h3>
       <hr>
       <p>Retrieve a random fake tweet generated via Markov chains. The Markov chains reference our entire database of real Trump tweets. The algorithm will only return a fake tweet that is sufficiently different from any real tweets. It will not reproduce an existing tweet.</p>
       <pre>GET https://turingtweets.herokuapp.com/fake</pre>
       <p>Returns</p>
-      <pre>{"tweet": "For you newcomers, George Ross was one of the dumbest racists around - an arrogant dope with no talent."}</pre>
+      <pre>{"tweet": "TEXT OF A FAKE TWEET"}</pre>
 
       <h3>Get User-Validated Fake Tweet</h3>
       <hr>
       <p>Retrieve a random user-validated fake tweet. All the tweets from this database are ones that have succeeded in fooling a user at some point. Will return None if there are no tweets in the database.</p>
       <pre>GET https://turingtweets.herokuapp.com/fake-validated</pre>
       <p>Returns</p>
-      <pre>{"tweet": "Michael Vick of the Philadelphia @eagles is a great man &amp; great leader."}</pre>
+      <pre>{"tweet": "TEXT OF A VALIDATED FAKE TWEET"}</pre>
     </div>
   </div>
 {% endblock content %}
