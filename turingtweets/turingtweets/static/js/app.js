@@ -45,6 +45,7 @@ $('.div-tweet-photo-text').eq(0).click(function() {
         $.post('/', {fakeTweet:fake});
     }
     $('.button').show();
+    $('.div-tweet-photo-text').off('click');
 });
 
 $('.div-tweet-photo-text').eq(1).click(function() {
@@ -68,6 +69,7 @@ $('.div-tweet-photo-text').eq(1).click(function() {
         $.post('/', {fakeTweet:fake});
     }
     $('.button').show();
+    $('.div-tweet-photo-text').off('click');
 });
 
 $('.button').click(function() {
