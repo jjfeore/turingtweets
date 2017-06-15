@@ -101,7 +101,7 @@ def get_tweets(api, username):
     for tweet in tweets:
         if (datetime.datetime.now() - tweet.created_at).days < 1:
             list_of_tweets.append(tweet.text)
-    return reversed(list_of_tweets)
+    return list(reversed(list_of_tweets))
 
 
 if __name__ == "__main__":
