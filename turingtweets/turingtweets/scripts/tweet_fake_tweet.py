@@ -46,7 +46,7 @@ class FakeTweet(Base):
     chosen = Column(Integer)
 
 
-def get_engine(settings, prefix='sqlalchemy.'):
+def get_engine(settings, prefix='sqlalchemy.'):  # pragma: no cover
     return engine_from_config(settings, prefix)
 
 
@@ -55,25 +55,20 @@ def get_fake_tweet():
     engine = get_engine(test_dict)
     SessionFactory = sessionmaker(bind=engine)
     session = SessionFactory()
-    # print(session.query(FakeTweet).first())
-    # print(session.query(FakeTweet).first().tweeted)
-    # print(session.query(FakeTweet).filter(FakeTweet.tweeted==False).first())
     if session.query(FakeTweet).filter_by(tweeted=False).first():
-        print('we have a tweet to tweet.')
         fake_tweet = session.query(FakeTweet).filter_by(tweeted=False).first().faketweet
         session.query(FakeTweet).filter(FakeTweet.faketweet == fake_tweet).update({'tweeted':True})
         session.commit()
-        print(fake_tweet)
         tweet_fake_tweet(fake_tweet)
 
 
-def tweet_fake_tweet(tweet):
+def tweet_fake_tweet(tweet):  # pragma: no cover
     auth = tweepy.OAuthHandler(os.environ.get('CONSUMER_KEY'), os.environ.get('CONSUMER_SECRET'))
     auth.set_access_token(os.environ.get('ACCESS_TOKEN'), os.environ.get('ACCESS_TOKEN_SECRET'))
     api = tweepy.API(auth)
     api.update_status(status=tweet)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     print('running tweet_fake_tweet...')
     get_fake_tweet()

@@ -21,7 +21,7 @@ from sqlalchemy import engine_from_config
 from sqlalchemy.orm import sessionmaker
 
 
-def gen_markov():
+def gen_markov():  # pragma: no cover
     """Compile all the tweets and create a Markov chain."""
     host_url = os.environ.get('REDIS_URL')
     access_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
@@ -59,15 +59,12 @@ class Tweet(Base):
     tweet = Column(Unicode)
 
 
-
-def get_engine(settings, prefix='sqlalchemy.'):
+def get_engine(settings, prefix='sqlalchemy.'):  # pragma: no cover
     return engine_from_config(settings, prefix)
 
 
 def update_tweet_db():
-    """
-    This function updates the database with tweets from the last 24 hours.
-    """
+    """Update the DB with tweets from the last 24 hours."""
     test_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
     engine = get_engine(test_dict)
     SessionFactory = sessionmaker(bind=engine)
@@ -82,10 +79,8 @@ def update_tweet_db():
     gen_markov()
 
 
-def authenticate_with_twitter():
-    """
-    This function is responsible for authenticating with Twitter.
-    """
+def authenticate_with_twitter():  # pragma: no cover
+    """Authenticate with Twitter."""
     auth = tweepy.OAuthHandler(os.environ.get('CONSUMER_KEY'), os.environ.get('CONSUMER_SECRET'))
     auth.set_access_token(os.environ.get('ACCESS_TOKEN'), os.environ.get('ACCESS_TOKEN_SECRET'))
     api = tweepy.API(auth)
@@ -93,9 +88,7 @@ def authenticate_with_twitter():
 
 
 def get_tweets(api, username):
-    """
-    This function is responsible for getting tweets from the last 24 hours.
-    """
+    """Get tweets from the last 24 hours."""
     tweets = api.user_timeline(username, page=1)
     list_of_tweets = []
     for tweet in tweets:
@@ -104,5 +97,5 @@ def get_tweets(api, username):
     return list(reversed(list_of_tweets))
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     update_tweet_db()
