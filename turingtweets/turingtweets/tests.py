@@ -123,8 +123,21 @@ def test_create_post_request(post_request):
     data = {'fakeTweet': 'I would rather run against Crooked Hillary Clinton, I am running for president and law prohibits. LOVE!'}
     post_request.POST = data
     response = home_view(post_request)
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     assert response == {}
+
+
+def test_create_not_post_request(post_request):
+    from turingtweets.views.default import home_view
+    response = home_view(post_request)
+    # import pdb; pdb.set_trace()
+    assert response is not None
+
+#WIP Not sure how to return this value
+def test_doc_view_return_value(dummy_request):
+    from turingtweets.views.default import doc_view
+    response = doc_view(dummy_request)
+    assert response['page'] == 'Documentation'
 
     # ============Tests for Home view routes===============
 
