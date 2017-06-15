@@ -162,3 +162,26 @@ def test_img_tags_are_populated(testapp_route):
     html = response.html
     import pdb; pdb.set_trace()
     assert len(html.findAll('img')) == 4
+
+
+# ============Tests for documentation route===============
+
+
+def test_home_route_returns_response_is_dict(dummy_request):
+    """Home view returns a Response Object is dict."""
+    from turingtweets.views.default import home_view
+    response = home_view(dummy_request)
+    assert isinstance(response, dict)
+
+
+def test_home_view_is_good_dict_has_property(dummy_request):
+    """Home view response dict has property."""
+    from turingtweets.views.default import home_view
+    response = home_view(dummy_request)
+    assert response['page'] == 'Home'
+
+
+def test_home_view_returns_200(testapp_route):
+    """Home view response has 200."""
+    response = testapp_route.get('/', status=200)
+    assert response.status_code == 200
