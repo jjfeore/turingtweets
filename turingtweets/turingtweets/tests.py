@@ -368,7 +368,7 @@ def test_gen_markov_pickles_a_markov_chain(get_markov):
     """Test that key of markov_tweets is in redis."""
     markov_chains = get_markov.get('markov_tweets')
     markov_chains = pickle.loads(markov_chains)
-    assert isinstance(markovify.Text, markov_chains)
+    assert isinstance(markov_chains, markovify.Text)
 
 
 def test_gen_tweet_returns_non_real_tweet():
