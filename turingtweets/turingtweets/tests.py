@@ -347,6 +347,12 @@ def test_fake_val_json_is_in_fake_db(testapp_route):
 # # ============Tests for Twitter Functionality===============
 
 
+def test_authenticate_gets_twitter_API():
+    """Test if a valid Twitter API is returned."""
+    from turingtweets.scripts.update_tweet_db import authenticate_with_twitter
+    assert isinstance(authenticate_with_twitter(), tweepy.API)
+
+
 def test_get_tweets_includes_most_recent_tweet(get_api):
     """List of tweets from get_tweets() returns most recent tweet."""
     from turingtweets.scripts.update_tweet_db import get_tweets
@@ -354,6 +360,17 @@ def test_get_tweets_includes_most_recent_tweet(get_api):
     last_tweet = get_api.user_timeline("realdonaldtrump", count=1)[0]
     assert last_tweet.text in tweet_list
 
+
+def test_update_tweet_db_updates_the_db():
+    """Check to see if database is updated."""
+    from turingtweets.scripts.update_tweet_db import update_tweet_db
+    access_dict = {'sqlalchemy.url': os.environ.get('DATABASE_URL')}
+    engine = get_engine(access_dict)
+    session_factory = sessionmaker(bind=engine)
+    session = session_factory()
+    original_count = session.query(Tweet).count()
+    update_tweet_db()
+    assert session.query(Tweet).count() > original_count
 
 # # ============Tests for Markov Chains===============
 

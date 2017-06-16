@@ -79,7 +79,7 @@ def update_tweet_db():
     gen_markov()
 
 
-def authenticate_with_twitter():  # pragma: no cover
+def authenticate_with_twitter():
     """Authenticate with Twitter."""
     auth = tweepy.OAuthHandler(os.environ.get('CONSUMER_KEY'), os.environ.get('CONSUMER_SECRET'))
     auth.set_access_token(os.environ.get('ACCESS_TOKEN'), os.environ.get('ACCESS_TOKEN_SECRET'))
