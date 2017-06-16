@@ -3,6 +3,9 @@ import pytest
 import os
 import json
 import tweepy
+import markovify
+import redis
+import pickle
 from pyramid import testing
 from pyramid.response import Response
 from turingtweets.models.mymodel import Tweet, FakeTweet
@@ -37,6 +40,16 @@ def get_api():
     auth.set_access_token(os.environ.get('ACCESS_TOKEN'), os.environ.get('ACCESS_TOKEN_SECRET'))
     api = tweepy.API(auth)
     return api
+
+
+@pytest.fixture
+def get_markov():
+    """Return a redis connection."""
+    from turingtweets.scripts.builddict import gen_markov
+    gen_markov()
+    host_url = os.environ.get('REDIS_URL')
+    chains = redis.from_url(host_url)
+    return chains
 
 
 @pytest.fixture
@@ -122,12 +135,6 @@ def home_response():
     # ============Test of POST request===============
 
 
-@pytest.fixture
-def post_request(dummy_request):
-    dummy_request.method = "POST"
-    return dummy_request
-
-
 def test_create_post_request(post_request):
     from turingtweets.views.default import home_view
     data = {'fakeTweet': 'I would rather run against Crooked Hillary Clinton, I am running for president and law prohibits. LOVE!'}
@@ -143,7 +150,7 @@ def test_create_not_post_request(post_request):
     # import pdb; pdb.set_trace()
     assert response is not None
 
-#WIP Not sure how to return this value
+
 def test_doc_view_return_value(dummy_request):
     from turingtweets.views.default import doc_view
     response = doc_view(dummy_request)
@@ -348,7 +355,20 @@ def test_get_tweets_includes_most_recent_tweet(get_api):
     assert last_tweet.text in tweet_list
 
 
-# # ============Tests for Fake Logic===============
+# # ============Tests for Markov Chains===============
+
+
+def test_gen_markov_adds_redis_key(get_markov):
+    """Test that key of markov_tweets is in redis."""
+    markov_chains = get_markov.get('markov_tweets')
+    assert markov_chains
+
+
+def test_gen_markov_pickles_a_markov_chain(get_markov):
+    """Test that key of markov_tweets is in redis."""
+    markov_chains = get_markov.get('markov_tweets')
+    markov_chains = pickle.loads(markov_chains)
+    assert isinstance(markovify.Text, markov_chains)
 
 
 def test_gen_tweet_returns_non_real_tweet():
