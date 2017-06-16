@@ -143,7 +143,7 @@ def test_create_not_post_request(post_request):
     # import pdb; pdb.set_trace()
     assert response is not None
 
-#WIP Not sure how to return this value
+
 def test_doc_view_return_value(dummy_request):
     from turingtweets.views.default import doc_view
     response = doc_view(dummy_request)
