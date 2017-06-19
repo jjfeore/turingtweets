@@ -1,0 +1,15 @@
+[run]
+source = turingtweets
+omit =
+  turingtweets/test
+  turingtweets/test*
+  turingtweets/models/*
+  turingtweets/scripts/initializedb.py
+  turingtweets/templates/*
+  turingtweets/views/notfound.py
+  turingtweets/views/__init__.py
+  turingtweets/routes.py
+  turingtweets/__init__.py
+
+[report]
+show_missing = True

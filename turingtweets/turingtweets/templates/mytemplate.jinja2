@@ -1,0 +1,22 @@
+{% extends "layout.jinja2" %}
+{% block content %}
+    <div>
+      <h2 class="white-text h2-white-text">
+            Pick the Real Tweet
+      </h2>
+      <span id="twitter-info">Tweet archived for use on <a href="https://twitter.com/turingtrump">@turingtrump</a></span>
+    </div>
+    <section class="div-two-tweets">
+        <div class="div-tweet-photo-text">
+          <img id="tweet-left" class="img-tweet" src="{{ request.static_path('turingtweets:static/face.png') }}" alt="" />
+          </br>
+          <p class="p-tweet-text" id="left-tweet">{{ real }}</p>
+        </div>
+
+        <div class="div-tweet-photo-text">
+          <img id="tweet-right" class="img-tweet" src="{{ request.static_path('turingtweets:static/face.png') }}" alt="" />
+          </br>
+          <p class="p-tweet-text" id="right-tweet">{{ fake }}</p>
+        </div>
+    </section>
+{% endblock content %}
